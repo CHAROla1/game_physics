@@ -8,6 +8,54 @@
 #define MIDPOINT 2
 // Do Not Change
 
+class Spring {
+
+public:
+	int point1;
+	int point2;
+	float stiffness;
+	float initialLength;
+	//float currentLength;
+	Spring(int point1, int point2, float initialLength) {
+		this->point1 = point1;
+		this->point2 = point2;
+		this->initialLength = initialLength;
+	}
+	void setStiffness(float stiffness);
+};
+
+class Point {
+public:
+	Vec3 position;
+	Vec3 velocity;
+	Vec3 force;
+	float mass;
+	float damping;
+	bool isFixed;
+	Point(Vec3 position, Vec3 Velocity, bool isFixed) {
+		this->position = position;
+		this->velocity = Velocity;
+		this->isFixed = isFixed;
+	}
+};
+
+
+///* hang */
+//struct Spring {
+//	massPoint* masspoint1;
+//	massPoint* masspoint2;
+//	float initialLength;
+//	Spring(massPoint* p1, massPoint* p2, float l, float s) : masspoint1(p1), masspoint2(p2), initialLength(l) {}
+//}
+//
+//struct massPoint {
+//	Vec3 position;
+//	Vec3 velocity;
+//	bool isFixed;
+//	Vec3 force;
+//	massPoint(Vec3 p, Vec3 v, bool f, Vec3 force = Vec3()) : position(p), velocity(v), isFixed(f) {}
+//}
+///* hang */
 
 class MassSpringSystemSimulator:public Simulator{
 public:
@@ -37,6 +85,13 @@ public:
 	Vec3 getVelocityOfMassPoint(int index);
 	void applyExternalForce(Vec3 force);
 	
+	// wufei yang
+	void HeunMethod(float timeStep);
+	void EulerMethod(float timeStep);
+	void MidpointMethod(float timeStep);
+	void LeapFrogMethod(float timeStep);
+	
+
 	// Do Not Change
 	void setIntegrator(int integrator) {
 		m_iIntegrator = integrator;
@@ -48,6 +103,16 @@ private:
 	float m_fStiffness;
 	float m_fDamping;
 	int m_iIntegrator;
+
+	vector<Point> m_points;
+	vector<Spring> m_springs;
+
+	///** hang */
+	//vector<massPoint*> massPoints;
+	//vector<Spring*> springs;
+	//void addForce(massPoint* point);
+	//void updateLength(Spring* spring);
+	//pair<Vec3, Vec3> eulerHelper(float timeStep, massPoint* point);
 
 	// UI Attributes
 	Vec3 m_externalForce;
