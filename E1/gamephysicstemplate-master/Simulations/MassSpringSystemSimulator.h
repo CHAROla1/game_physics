@@ -10,10 +10,10 @@
 
 /* hang */
 struct Spring {
-	massPoint* masspoint1;
-	massPoint* masspoint2;
+	int masspoint1;
+	int masspoint2;
 	float initialLength;
-	Spring(massPoint* p1, massPoint* p2, float l, float s): masspoint1(p1), masspoint2(p2), initialLength(l) {};
+	Spring(int p1, int p2, float l, float s): masspoint1(p1), masspoint2(p2), initialLength(l) {};
 }
 
 struct massPoint {
@@ -44,6 +44,8 @@ public:
 	void onClick(int x, int y);
 	void onMouse(int x, int y);
 
+	void setScale(float x, float y, float z);
+
 	// Specific Functions
 	void setMass(float mass);
 	void setStiffness(float stiffness);
@@ -73,9 +75,9 @@ private:
 	int m_iIntegrator;
 
 	/** hang */
-	vector<massPoint*> massPoints;
-	vector<Spring*> springs;
-	void addForce(massPoint* point);
+	vector<massPoint*> m_massPoints;
+	vector<Spring*> m_springs;
+	void updateForce(massPoint* point);
 	void updateLength(Spring* spring);
 	pair<Vec3, Vec3> eulerHelper(float timeStep, massPoint* point);
 	
@@ -85,6 +87,6 @@ private:
 	Point2D m_mouse;
 	Point2D m_trackmouse;
 	Point2D m_oldtrackmouse;
-	float m_scale;
+	Vec3 m_scale;
 };
 #endif
