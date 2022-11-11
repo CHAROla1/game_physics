@@ -36,26 +36,14 @@ public:
 		this->position = position;
 		this->velocity = Velocity;
 		this->isFixed = isFixed;
+		this->force = Vec3(0, 0, 0);
+		this->damping = 0;
+	}
+
+	void resetForce() {
+		this->force = Vec3(0, 0, 0);
 	}
 };
-
-
-///* hang */
-//struct Spring {
-//	massPoint* masspoint1;
-//	massPoint* masspoint2;
-//	float initialLength;
-//	Spring(massPoint* p1, massPoint* p2, float l, float s) : masspoint1(p1), masspoint2(p2), initialLength(l) {}
-//}
-//
-//struct massPoint {
-//	Vec3 position;
-//	Vec3 velocity;
-//	bool isFixed;
-//	Vec3 force;
-//	massPoint(Vec3 p, Vec3 v, bool f, Vec3 force = Vec3()) : position(p), velocity(v), isFixed(f) {}
-//}
-///* hang */
 
 class MassSpringSystemSimulator:public Simulator{
 public:
@@ -84,6 +72,10 @@ public:
 	Vec3 getPositionOfMassPoint(int index);
 	Vec3 getVelocityOfMassPoint(int index);
 	void applyExternalForce(Vec3 force);
+
+	// wufei yang
+	void addForce();
+	void resetForce();
 	
 	// wufei yang
 	void HeunMethod(float timeStep);
