@@ -138,6 +138,10 @@ void MassSpringSystemSimulator::initUI(DrawingUtilitiesClass * DUC) {
 
     reset();
 
+    addSpring(addMassPoint(Vec3(0.0f, 0.0f, 0.0f), Vec3(-1.0f, 0.0f, 0.0f), false), 
+                addMassPoint(Vec3(0.0f, 2.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), false),
+                    1.0f, 40.0f);
+
     switch (m_iIntegrator){
         case EULER:
         TwAddVarRW(DUC->g_pTweakBar, "Stiffness", TW_TYPE_FLOAT, &m_fStiffness, "min=1");
