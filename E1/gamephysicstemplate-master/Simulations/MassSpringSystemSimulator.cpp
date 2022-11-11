@@ -1,7 +1,6 @@
 #include "MassSpringSystemSimulator.h"
-
 /*
-UIæ‰§è¡Œé¡ºåº
+UIÖ´ÐÐË³Ðò
 notifyCaseChanged
 initUI
 simulateTimestep
@@ -25,7 +24,7 @@ const char* MassSpringSystemSimulator::getTestCasesStr() {
 	return "Euler Method, Leap_Frog, Midpoint Method";
 }
 
-// æ¯æ¢ä¸€ä¸ªtestå°±ä¼šæ‰§è¡Œä¸€æ¬¡
+// Ã¿»»Ò»¸ötest¾Í»áÖ´ÐÐÒ»´Î
 void MassSpringSystemSimulator::initUI(DrawingUtilitiesClass* DUC) {
 	this->DUC = DUC;
 
@@ -63,11 +62,10 @@ void MassSpringSystemSimulator::reset() {
 }
 
 void MassSpringSystemSimulator::drawFrame(ID3D11DeviceContext* pd3dImmediateContext) {
-	cout << "DrawFrame" << endl;
 	std::mt19937 eng;
 	std::uniform_real_distribution<float> randCol(0.0f, 1.0f);
 	std::uniform_real_distribution<float> randPos(-0.5f, 0.5f);
-	
+
 	for (int i = 0; i < this->m_springs.size(); i++) {
 		this->DUC->setUpLighting(Vec3(), 0.4 * Vec3(1, 1, 1), 100, 0.6 * Vec3(randCol(eng), randCol(eng), randCol(eng)));
 		this->DUC->drawSphere(this->m_points.at(this->m_springs.at(i).point1).position, Vec3(sphere_size, sphere_size, sphere_size));
@@ -97,7 +95,6 @@ void MassSpringSystemSimulator::notifyCaseChanged(int testCase) {
 void MassSpringSystemSimulator::externalForcesCalculations(float timeElapsed) {}
 
 void MassSpringSystemSimulator::simulateTimestep(float timeStep) {
-	cout << "simulateTimeStep" << endl;
 	switch (this->m_iTestCase) {
 	case 0: //euler method
 		EulerMethod(timeStep);
@@ -124,7 +121,7 @@ void MassSpringSystemSimulator::setDampingFactor(float damping) {
 	this->m_fDamping = damping;
 }
 int MassSpringSystemSimulator::addMassPoint(Vec3 position, Vec3 Velocity, bool isFixed) {
-	Point p (position, Velocity, isFixed);
+	Point p(position, Velocity, isFixed);
 	this->m_points.push_back(p);
 	return 0;
 }
@@ -162,7 +159,7 @@ void MassSpringSystemSimulator::HeunMethod(float timeStep) {
 		Point p2 = this->m_points.at(s.point2);
 
 		float dis = norm(p1.position - p2.position);
-		Vec3 force_p1 = - s.stiffness * (dis - s.initialLength) * (p1.position - p2.position) / dis;
+		Vec3 force_p1 = -s.stiffness * (dis - s.initialLength) * (p1.position - p2.position) / dis;
 		Vec3 old_p1_acc = force_p1 / p1.mass;
 		Vec3 old_p2_acc = -force_p1 / p2.mass;
 
@@ -192,18 +189,17 @@ void MassSpringSystemSimulator::HeunMethod(float timeStep) {
 // wufe yang
 void MassSpringSystemSimulator::EulerMethod(float timeStep) {
 	for (int i = 0; i < this->m_springs.size(); i++) {
-		Spring *s = &this->m_springs.at(i);
-		Point *p1 = &this->m_points.at(s->point1);
-		Point *p2 = &this->m_points.at(s->point2);
+		Spring* s = &this->m_springs.at(i);
+		Point* p1 = &this->m_points.at(s->point1);
+		Point* p2 = &this->m_points.at(s->point2);
 
-		cout << "old p1 pos" << p1->position << endl;
-		cout << "old p2 pos" << p2->position << endl;
+		cout << "current position p1" << p1->position << endl;
+		cout << "current position p2" << p2->position << endl;
+
 		// calculate new position;
 		p1->position = p1->position + timeStep * p1->velocity;
 		p2->position = p2->position + timeStep * p2->velocity;
 
-		cout << "new p1 pos" << p1->position << endl;
-		cout << "new p2 pos" << p2->position << endl;
 		// calculte new velocity;
 		float dis = norm(p1->position - p2->position);
 		Vec3 force_p1 = -s->stiffness * (dis - s->initialLength) * (p1->position - p2->position) / dis;
@@ -217,9 +213,12 @@ void MassSpringSystemSimulator::EulerMethod(float timeStep) {
 
 void MassSpringSystemSimulator::MidpointMethod(float timeStep) {
 	for (int i = 0; i < this->m_springs.size(); i++) {
-		Spring *s = &this->m_springs.at(i);
-		Point *p1 = &this->m_points.at(s->point1);
-		Point *p2 = &this->m_points.at(s->point2);
+		Spring* s = &this->m_springs.at(i);
+		Point* p1 = &this->m_points.at(s->point1);
+		Point* p2 = &this->m_points.at(s->point2);
+
+		cout << "current position p1" << p1->position << endl;
+		cout << "current position p2" << p2->position << endl;
 
 		float dis = norm(p1->position - p2->position);
 		Vec3 force_p1 = -s->stiffness * (dis - s->initialLength) * (p1->position - p2->position) / dis;
@@ -250,15 +249,18 @@ void MassSpringSystemSimulator::MidpointMethod(float timeStep) {
 
 void MassSpringSystemSimulator::LeapFrogMethod(float timeStep) {
 	for (int i = 0; i < this->m_springs.size(); i++) {
-		Spring *s = &this->m_springs.at(i);
-		Point *p1 = &this->m_points.at(s->point1);
-		Point *p2 = &this->m_points.at(s->point2);
+		Spring* s = &this->m_springs.at(i);
+		Point* p1 = &this->m_points.at(s->point1);
+		Point* p2 = &this->m_points.at(s->point2);
+
+		cout << "current position p1" << p1->position << endl;
+		cout << "current position p2" << p2->position << endl;
 
 		float dis = norm(p1->position - p2->position);
 		Vec3 force_p1 = -s->stiffness * (dis - s->initialLength) * (p1->position - p2->position) / dis;
 		Vec3 old_p1_acc = force_p1 / p1->mass;
 		Vec3 old_p2_acc = -force_p1 / p2->mass;
-		
+
 		Vec3 new_p1_vel = p1->velocity + timeStep * old_p1_acc;
 		Vec3 new_p2_vel = p2->velocity + timeStep * old_p2_acc;
 

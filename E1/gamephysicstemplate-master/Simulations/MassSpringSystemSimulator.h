@@ -91,7 +91,6 @@ public:
 	void MidpointMethod(float timeStep);
 	void LeapFrogMethod(float timeStep);
 	
-
 	// Do Not Change
 	void setIntegrator(int integrator) {
 		m_iIntegrator = integrator;
