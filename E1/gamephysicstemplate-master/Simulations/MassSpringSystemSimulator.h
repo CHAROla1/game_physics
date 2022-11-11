@@ -13,16 +13,16 @@ struct Spring {
 	int masspoint1;
 	int masspoint2;
 	float initialLength;
-	Spring(int p1, int p2, float l, float s): masspoint1(p1), masspoint2(p2), initialLength(l) {};
-}
+	Spring(int p1, int p2, float l) : masspoint1(p1), masspoint2(p2), initialLength(l) {}
+};
 
 struct massPoint {
 	Vec3 position;
 	Vec3 velocity;
 	bool isFixed;
 	Vec3 force;
-	massPoint(Vec3 p, Vec3 v, bool f, Vec3 force = Vec3()): position(p), velocity(v), isFixed(f) {};
-}
+	massPoint(Vec3 p, Vec3 v, bool f, Vec3 force = Vec3()) : position(p), velocity(v), isFixed(f) {}
+};
 /* hang */
 
 class MassSpringSystemSimulator:public Simulator{
@@ -77,8 +77,8 @@ private:
 	/** hang */
 	vector<massPoint*> m_massPoints;
 	vector<Spring*> m_springs;
-	void updateForce(massPoint* point);
-	void updateLength(Spring* spring);
+	void updateForce(vector<massPoint*> massPoints);
+	//void updateLength(Spring* spring);
 	pair<Vec3, Vec3> eulerHelper(float timeStep, massPoint* point);
 	
 
