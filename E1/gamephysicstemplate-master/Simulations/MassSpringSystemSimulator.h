@@ -8,11 +8,30 @@
 #define MIDPOINT 2
 // Do Not Change
 
+/* hang */
+struct Spring {
+	massPoint* masspoint1;
+	massPoint* masspoint2;
+	float initialLength;
+	Spring(massPoint* p1, massPoint* p2, float l, float s): masspoint1(p1), masspoint2(p2), initialLength(l) {};
+}
+
+struct massPoint {
+	Vec3 position;
+	Vec3 velocity;
+	bool isFixed;
+	Vec3 force;
+	massPoint(Vec3 p, Vec3 v, bool f, Vec3 force = Vec3()): position(p), velocity(v), isFixed(f) {};
+}
+/* hang */
 
 class MassSpringSystemSimulator:public Simulator{
 public:
 	// Construtors
 	MassSpringSystemSimulator();
+
+	// decstructors
+	~MassSpringSystemSimulator();
 	
 	// UI Functions
 	const char * getTestCasesStr();
@@ -36,6 +55,10 @@ public:
 	Vec3 getPositionOfMassPoint(int index);
 	Vec3 getVelocityOfMassPoint(int index);
 	void applyExternalForce(Vec3 force);
+
+	// integrator
+	void eulerIntegrator(float timeStep);
+	void midpointIntergrator(float timeStep);
 	
 	// Do Not Change
 	void setIntegrator(int integrator) {
@@ -49,10 +72,19 @@ private:
 	float m_fDamping;
 	int m_iIntegrator;
 
+	/** hang */
+	vector<massPoint*> massPoints;
+	vector<Spring*> springs;
+	void addForce(massPoint* point);
+	void updateLength(Spring* spring);
+	pair<Vec3, Vec3> eulerHelper(float timeStep, massPoint* point);
+	
+
 	// UI Attributes
 	Vec3 m_externalForce;
 	Point2D m_mouse;
 	Point2D m_trackmouse;
 	Point2D m_oldtrackmouse;
+	float m_scale;
 };
 #endif
