@@ -8,39 +8,12 @@
 #define MIDPOINT 2
 // Do Not Change
 
-class Spring {
-
-public:
-	int point1;
-	int point2;
-	float stiffness;
-	float initialLength;
-	//float currentLength;
-	Spring(int point1, int point2, float initialLength) {
-		this->point1 = point1;
-		this->point2 = point2;
-		this->initialLength = initialLength;
-	}
-	void setStiffness(float stiffness);
-};
-
-class Point {
-public:
-	Vec3 position;
-	Vec3 velocity;
-	Vec3 force;
-	float mass;
-	float damping;
-	bool isFixed;
-	Point(Vec3 position, Vec3 Velocity, bool isFixed) {
-		this->position = position;
-		this->velocity = Velocity;
-		this->isFixed = isFixed;
-	}
-};
 
 class MassSpringSystemSimulator :public Simulator {
+
+
 public:
+
 	// Construtors
 	MassSpringSystemSimulator();
 
@@ -67,17 +40,11 @@ public:
 	Vec3 getVelocityOfMassPoint(int index);
 	void applyExternalForce(Vec3 force);
 
-	// wufei yang
-	void HeunMethod(float timeStep);
-	void EulerMethod(float timeStep);
-	void MidpointMethod(float timeStep);
-	void LeapFrogMethod(float timeStep);
-
-
 	// Do Not Change
 	void setIntegrator(int integrator) {
 		m_iIntegrator = integrator;
 	}
+
 
 private:
 	// Data Attributes
@@ -86,13 +53,13 @@ private:
 	float m_fDamping;
 	int m_iIntegrator;
 
-	vector<Point> m_points;
-	vector<Spring> m_springs;
-
 	// UI Attributes
 	Vec3 m_externalForce;
 	Point2D m_mouse;
 	Point2D m_trackmouse;
 	Point2D m_oldtrackmouse;
+
+	
 };
+
 #endif
