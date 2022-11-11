@@ -106,13 +106,6 @@ private:
 	vector<Point> m_points;
 	vector<Spring> m_springs;
 
-	///** hang */
-	//vector<massPoint*> massPoints;
-	//vector<Spring*> springs;
-	//void addForce(massPoint* point);
-	//void updateLength(Spring* spring);
-	//pair<Vec3, Vec3> eulerHelper(float timeStep, massPoint* point);
-
 	// UI Attributes
 	Vec3 m_externalForce;
 	Point2D m_mouse;
