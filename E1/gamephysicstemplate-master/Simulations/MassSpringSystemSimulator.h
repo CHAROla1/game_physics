@@ -8,15 +8,45 @@
 #define MIDPOINT 2
 // Do Not Change
 
+class Spring {
 
-class MassSpringSystemSimulator:public Simulator{
+public:
+	int point1;
+	int point2;
+	float stiffness;
+	float initialLength;
+	//float currentLength;
+	Spring(int point1, int point2, float initialLength) {
+		this->point1 = point1;
+		this->point2 = point2;
+		this->initialLength = initialLength;
+	}
+	void setStiffness(float stiffness);
+};
+
+class Point {
+public:
+	Vec3 position;
+	Vec3 velocity;
+	Vec3 force;
+	float mass;
+	float damping;
+	bool isFixed;
+	Point(Vec3 position, Vec3 Velocity, bool isFixed) {
+		this->position = position;
+		this->velocity = Velocity;
+		this->isFixed = isFixed;
+	}
+};
+
+class MassSpringSystemSimulator :public Simulator {
 public:
 	// Construtors
 	MassSpringSystemSimulator();
-	
+
 	// UI Functions
-	const char * getTestCasesStr();
-	void initUI(DrawingUtilitiesClass * DUC);
+	const char* getTestCasesStr();
+	void initUI(DrawingUtilitiesClass* DUC);
 	void reset();
 	void drawFrame(ID3D11DeviceContext* pd3dImmediateContext);
 	void notifyCaseChanged(int testCase);
@@ -36,7 +66,14 @@ public:
 	Vec3 getPositionOfMassPoint(int index);
 	Vec3 getVelocityOfMassPoint(int index);
 	void applyExternalForce(Vec3 force);
-	
+
+	// wufei yang
+	void HeunMethod(float timeStep);
+	void EulerMethod(float timeStep);
+	void MidpointMethod(float timeStep);
+	void LeapFrogMethod(float timeStep);
+
+
 	// Do Not Change
 	void setIntegrator(int integrator) {
 		m_iIntegrator = integrator;
@@ -48,6 +85,9 @@ private:
 	float m_fStiffness;
 	float m_fDamping;
 	int m_iIntegrator;
+
+	vector<Point> m_points;
+	vector<Spring> m_springs;
 
 	// UI Attributes
 	Vec3 m_externalForce;
