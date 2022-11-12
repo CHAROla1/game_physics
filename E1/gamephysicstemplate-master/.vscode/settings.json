@@ -4,6 +4,7 @@
         "__split_buffer": "cpp",
         "deque": "cpp",
         "list": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "__node_handle": "cpp"
     }
 }

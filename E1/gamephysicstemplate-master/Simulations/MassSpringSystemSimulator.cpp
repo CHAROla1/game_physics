@@ -11,10 +11,12 @@ MassSpringSystemSimulator::MassSpringSystemSimulator() {
 
 MassSpringSystemSimulator::~MassSpringSystemSimulator() { 
     if (!m_massPoints.empty()) {
-        for each(auto* point in m_massPoints) delete point;
+        for each (auto * point in m_massPoints) delete point;
+        m_massPoints.clear();
     }
     if (!m_springs.empty()) {
-        for each(auto* spring in m_springs) delete spring;
+        for each (auto * spring in m_springs) delete spring;
+        m_springs.clear();
     }
 }
 
@@ -64,60 +66,40 @@ void MassSpringSystemSimulator::updateForce(vector<massPoint*> massPoints) {
         // F_int = -k * (l - L) * dirction
         if (p1 != NULL && p2 != NULL) { 
             Vec3 l = p1->position - p2->position;
-            forceInternal_p1 = ( m_fStiffness * ((float) norm(l) - spring->initialLength) * getNormalized(l));
+            forceInternal_p1 = -( m_fStiffness * ((float) norm(l) - spring->initialLength) * getNormalized(l));
             forceInternal_p2 = ( m_fStiffness * ((float) norm(l) - spring->initialLength) * getNormalized(l));
             // update the force to p1 and p2
             p1->force += forceInternal_p1;
-            p2->force -= forceInternal_p2;
+            p2->force += forceInternal_p2;
         }
     }
 }
 
-/** calculate the position and velocity of the masspoint with euler within a unique timeStep.
- * ! Not the final vectors! Just a variant!
- * @return a pair of vector (velocity, position)
- */
-pair<Vec3, Vec3> MassSpringSystemSimulator::eulerHelper(float timeStep, massPoint* point) {
-    Vec3 acc = point->force / m_fMass;
-    Vec3 velocity = timeStep * acc;
-    Vec3 position = (point->velocity * timeStep);
-    // clear force
-    point->force = 0.0f;
-    return make_pair(velocity, position);
+/** calculate the position and velocity of the masspoint with euler and update the force within a unique timeStep. */
+void MassSpringSystemSimulator::eulerHelper(float timeStep, vector<massPoint*> massPoints) {
+    for each (auto * masspoint in m_massPoints) {
+        Vec3 acc = masspoint->force / m_fMass;
+        masspoint->position += (masspoint->velocity * timeStep);
+        masspoint->velocity += timeStep * acc;
+        masspoint->force = 0.0f;
+    }
+    updateForce(m_massPoints);
 }
 
 void MassSpringSystemSimulator::eulerIntegrator(float timeStep) {
-    // store the updated position and velocity (in order of a simultaneous start-up)
     vector<pair<Vec3, Vec3> > temp;
-    for each(auto* masspoint in m_massPoints) {
-        pair<Vec3, Vec3> p = eulerHelper(timeStep, masspoint);
-        temp.push_back(p);
-    }
-    updateForce(m_massPoints);
-    // update the position and velocity of each mass point
-    for (int i=0; i<getNumberOfMassPoints(); i++) {
-        pair<Vec3, Vec3> p = temp.at(i);
-        m_massPoints.at(i)->velocity += p.first;
-        m_massPoints.at(i)->position += p.second;
-    }
+    eulerHelper(timeStep, m_massPoints);
 }
 
 void MassSpringSystemSimulator::midpointIntergrator(float timeStep) { 
-    // store the midpoint (in order to calculate the force with midpoint positions)
-    vector<massPoint*> massPoints;
-    for each(auto* masspoint in m_massPoints) {
-        pair<Vec3, Vec3> p = eulerHelper(timeStep / 2.0f, masspoint);
-        Vec3 velocityMidPoint = p.first;
-        Vec3 positionMidPoint = p.second;
-        massPoint* temp = new massPoint(masspoint->velocity+velocityMidPoint, masspoint->position+positionMidPoint, 
-                                        masspoint->isFixed, masspoint->force);
-        massPoints.push_back(temp);
-    }
+    // store the midpoints (in order to calculate the force with midpoint positions)
+    vector<massPoint*> massPoints = vector<massPoint*>(m_massPoints);
+    eulerHelper(timeStep / 2.0f, massPoints);
     updateForce(massPoints);
-    // update the position, velocity and force of each mass point
+    // update the position and velocityof each mass point
     for (int i=0; i<getNumberOfMassPoints(); i++) {
         Vec3 accMidPoint = massPoints.at(i)->force / m_fMass;
-        m_massPoints.at(i)->position += (timeStep * massPoints.at(i)->position);
+        m_massPoints.at(i)->position += (timeStep * massPoints.at(i)->velocity);
         m_massPoints.at(i)->velocity += (timeStep * accMidPoint);
     }
 }
@@ -138,9 +120,9 @@ void MassSpringSystemSimulator::initUI(DrawingUtilitiesClass * DUC) {
 
     reset();
 
-    addSpring(addMassPoint(Vec3(0.0f, 0.0f, 0.0f), Vec3(-1.0f, 0.0f, 0.0f), false), 
-                addMassPoint(Vec3(0.0f, 2.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), false),
-                    1.0f);
+    int p1 = addMassPoint(Vec3(0.0f, 0.0f, 0.0f), Vec3(-1.0f, 0.0f, 0.0f), false);
+    int p2 = addMassPoint(Vec3(0.0f, 2.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), false);
+    addSpring(p1, p2, 1.0f);
 
     switch (m_iIntegrator){
         case EULER:
@@ -170,10 +152,10 @@ void MassSpringSystemSimulator::reset() {
 	m_trackmouse.x = m_trackmouse.y = 0;
 	m_oldtrackmouse.x = m_oldtrackmouse.y = 0;
     if (!m_massPoints.empty()) {
-        for each (auto * point in m_massPoints) delete point;
+        m_massPoints.clear();
     }
     if (!m_springs.empty()) {
-        for each (auto * spring in m_springs) delete spring;
+        m_springs.clear();
     }
 }
 
@@ -182,8 +164,10 @@ void MassSpringSystemSimulator::drawFrame(ID3D11DeviceContext* pd3dImmediateCont
         DUC->drawSphere(point->position, m_scale);
     }
     for each(auto* spring in m_springs) {
+        DUC->beginLine();
         DUC->drawLine(m_massPoints[spring->masspoint1]->position, Vec3(3,5,7),
                         m_massPoints[spring->masspoint2]->position, Vec3(3,5,7));
+        DUC->endLine();
     }
 }
 

@@ -21,7 +21,7 @@ struct massPoint {
 	Vec3 velocity;
 	bool isFixed;
 	Vec3 force;
-	massPoint(Vec3 p, Vec3 v, bool f, Vec3 force = Vec3()) : position(p), velocity(v), isFixed(f) {}
+	massPoint(Vec3 p, Vec3 v, bool f, Vec3 force = Vec3()) : position(p), velocity(v), isFixed(f), force(force) {}
 };
 /* hang */
 
@@ -79,7 +79,7 @@ private:
 	vector<Spring*> m_springs;
 	void updateForce(vector<massPoint*> massPoints);
 	//void updateLength(Spring* spring);
-	pair<Vec3, Vec3> eulerHelper(float timeStep, massPoint* point);
+	void eulerHelper(float timeStep, vector<massPoint*> massPoints);
 	
 
 	// UI Attributes
