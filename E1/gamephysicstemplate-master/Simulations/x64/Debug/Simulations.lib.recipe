@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\Users\Administrator\Downloads\game_physics-tang\game_physics-tang\E1\gamephysicstemplate-master\AntTweakBar\lib\debug\AntTweakBar64.dll</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>C:\Users\Administrator\Downloads\game_physics-tang\game_physics-tang\E1\gamephysicstemplate-master\x64\Debug\effect.fxo</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

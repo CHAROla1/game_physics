@@ -177,8 +177,8 @@ void DrawBoundingBox(ID3D11DeviceContext* pd3dImmediateContext)
     for (int i=0; i<4; i++)
     {
         g_pPrimitiveBatchPositionColor->DrawLine(
-            VertexPositionColor(XMVectorSet(-0.5f, (float)(i%2)-0.5f, (float)(i/2)-0.5f, 1), Colors::Red),
-            VertexPositionColor(XMVectorSet( 0.6f, (float)(i%2)-0.5f, (float)(i/2)-0.5f, 1), Colors::Red)
+            VertexPositionColor(XMVectorSet(-2f, (float)(i%2)-2f, (float)(i/2)-2f, 1), Colors::Red),
+            VertexPositionColor(XMVectorSet( 2.4f, (float)(i%2)-2f, (float)(i/2)-2f, 1), Colors::Red)
         );
     }
 
@@ -186,8 +186,8 @@ void DrawBoundingBox(ID3D11DeviceContext* pd3dImmediateContext)
     for (int i=0; i<4; i++)
     {
         g_pPrimitiveBatchPositionColor->DrawLine(
-            VertexPositionColor(XMVectorSet((float)(i%2)-0.5f, -0.5f, (float)(i/2)-0.5f, 1), Colors::Green),
-            VertexPositionColor(XMVectorSet((float)(i%2)-0.5f,  0.6f, (float)(i/2)-0.5f, 1), Colors::Green)
+            VertexPositionColor(XMVectorSet((float)(i%2)-2f, -2f, (float)(i/2)-2f, 1), Colors::Green),
+            VertexPositionColor(XMVectorSet((float)(i%2)-2f,  2.4f, (float)(i/2)-2f, 1), Colors::Green)
         );
     }
 
@@ -195,8 +195,8 @@ void DrawBoundingBox(ID3D11DeviceContext* pd3dImmediateContext)
     for (int i=0; i<4; i++)
     {
         g_pPrimitiveBatchPositionColor->DrawLine(
-            VertexPositionColor(XMVectorSet((float)(i%2)-0.5f, (float)(i/2)-0.5f, -0.5f, 1), Colors::Blue),
-            VertexPositionColor(XMVectorSet((float)(i%2)-0.5f, (float)(i/2)-0.5f,  0.6f, 1), Colors::Blue)
+            VertexPositionColor(XMVectorSet((float)(i%2)-2f, (float)(i/2)-2f, -2f, 1), Colors::Blue),
+            VertexPositionColor(XMVectorSet((float)(i%2)-2f, (float)(i/2)-2f,  2.4f, 1), Colors::Blue)
         );
     }
 
