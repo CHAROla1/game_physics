@@ -15,13 +15,15 @@ public:
 	int point2;
 	float stiffness;
 	float initialLength;
-	//float currentLength;
 	Spring(int point1, int point2, float initialLength) {
 		this->point1 = point1;
 		this->point2 = point2;
 		this->initialLength = initialLength;
+		this->stiffness = 0;
 	}
-	void setStiffness(float stiffness);
+	void setStiffness(float stiffness) {
+		this->stiffness = stiffness;
+	}
 };
 
 class Point {
@@ -40,7 +42,7 @@ public:
 		this->damping = 0;
 	}
 
-	void resetForce() {
+	void clearForce() {
 		this->force = Vec3(0, 0, 0);
 	}
 };
@@ -75,7 +77,9 @@ public:
 
 	// wufei yang
 	void addForce();
-	void resetForce();
+	void clearForce();
+	Vec3 updateVelocity(const Point &p, const Vec3& vel, const Vec3 &acc, float timeStep);
+	Vec3 updatePosition(const Vec3& position, const Vec3& acc, float timeStep);
 	
 	// wufei yang
 	void HeunMethod(float timeStep);
@@ -97,6 +101,8 @@ private:
 
 	vector<Point> m_points;
 	vector<Spring> m_springs;
+	bool addGravity;
+	int collision;
 
 	// UI Attributes
 	Vec3 m_externalForce;

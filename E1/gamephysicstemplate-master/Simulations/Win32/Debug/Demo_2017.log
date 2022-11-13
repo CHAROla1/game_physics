@@ -1,30 +1,30 @@
 ﻿  MassSpringSystemSimulator.cpp
 D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\util\vectorbase.h(11,1): warning C4005: “NOMINMAX”: 宏重定义
 D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\util\vectorbase.h(11,1): message : 之前在命令行上声明的“NOMINMAX”
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(83,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(88,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(172,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(177,13): warning C4244: “初始化”: 从“Scalar”转换到“float”，可能丢失数据
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(92,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(97,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(183,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(188,13): warning C4244: “初始化”: 从“Scalar”转换到“float”，可能丢失数据
           with
           [
               Scalar=GamePhysics::Real
           ]
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(194,13): warning C4244: “=”: 从“Scalar”转换到“float”，可能丢失数据
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(205,13): warning C4244: “=”: 从“Scalar”转换到“float”，可能丢失数据
           with
           [
               Scalar=GamePhysics::Real
           ]
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(206,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(211,13): warning C4244: “初始化”: 从“Scalar”转换到“float”，可能丢失数据
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(217,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(222,13): warning C4244: “初始化”: 从“Scalar”转换到“float”，可能丢失数据
           with
           [
               Scalar=GamePhysics::Real
           ]
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(220,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(228,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(254,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(282,20): warning C4018: “<”: 有符号/无符号不匹配
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(303,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(239,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(318,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(348,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(378,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(407,20): warning C4018: “<”: 有符号/无符号不匹配
 D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\util\vectorbase.h(204,36): warning C4244: “参数”: 从“const Scalar”转换到“float”，可能丢失数据
           with
           [
@@ -127,5 +127,5 @@ D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-
               Scalar=double
           ]
 D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\util\vectorbase.h(1092,2): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(233): message : 查看对正在编译的函数 模板 实例化“std::ostream &GamePhysics::operator <<<GamePhysics::Real>(std::ostream &,const GamePhysics::vector3Dim<GamePhysics::Real> &)”的引用
+D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Simulations\MassSpringSystemSimulator.cpp(354): message : 查看对正在编译的函数 模板 实例化“std::ostream &GamePhysics::operator <<<GamePhysics::Real>(std::ostream &,const GamePhysics::vector3Dim<GamePhysics::Real> &)”的引用
   Demo_2017.vcxproj -> D:\Skript\TUM_Skript\Semester1\Game physics\game_physics\E1\gamephysicstemplate-master\Win32\Debug\Simulations.lib
