@@ -221,7 +221,11 @@ void MassSpringSystemSimulator::reset() {
 }
 
 void MassSpringSystemSimulator::drawFrame(ID3D11DeviceContext* pd3dImmediateContext) {
+    std::mt19937 eng;
+    std::uniform_real_distribution<float> randCol( 0.0f, 1.0f);
+    std::uniform_real_distribution<float> randPos(-0.5f, 0.5f);
     for each(auto* point in m_massPoints) {
+        DUC->setUpLighting(Vec3(),0.4*Vec3(1,1,1),100,0.6*Vec3(randCol(eng),randCol(eng), randCol(eng)));
         DUC->drawSphere(point->position, m_scale);
     }
     for each(auto* spring in m_springs) {
