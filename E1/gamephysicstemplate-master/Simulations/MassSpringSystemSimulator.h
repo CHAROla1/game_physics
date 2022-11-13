@@ -19,7 +19,7 @@ public:
 		this->point1 = point1;
 		this->point2 = point2;
 		this->initialLength = initialLength;
-		this->stiffness = 0;
+		this->stiffness = 40;
 	}
 	void setStiffness(float stiffness) {
 		this->stiffness = stiffness;
@@ -40,6 +40,7 @@ public:
 		this->isFixed = isFixed;
 		this->force = Vec3(0, 0, 0);
 		this->damping = 0;
+		this->mass = 10;
 	}
 
 	void clearForce() {

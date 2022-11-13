@@ -9,7 +9,7 @@ drawFrame
 #define sphere_size 0.025
 #define world_upper_bound 1
 #define world_lower_bound -1
-#define GRAVITY Vec3(0, -10, 0)
+#define GRAVITY Vec3(0, -0.5, 0)
 
 // ====== MassSpringSystemSimulator begin ======
 MassSpringSystemSimulator::MassSpringSystemSimulator() {
@@ -53,30 +53,33 @@ void MassSpringSystemSimulator::initUI(DrawingUtilitiesClass* DUC) {
 	this->m_points.clear();
 	this->m_springs.clear();
 
-	Point p0(Vec3(0, 0, 0), Vec3(-1, 0, 0), false);
-	p0.mass = 10;
-	Point p1(Vec3(0, 0.5, 0), Vec3(1, 0, 0), false);
-	p1.mass = 10;
-	Point p2(Vec3(0.5,0.5,0), Vec3(0, 1, 0), false);
-	p2.mass = 10;
-	Point p3(Vec3(0.5, 0, 0), Vec3(0, -1, 0), false);
-	p3.mass = 10;
+	Point p0(Vec3(-0.5, -0.5, 0), Vec3(-0.1, 0, 0), false);
+	Point p1(Vec3(-0.5, 0, 0), Vec3(-0.1, 0.1, 0), false);
+	Point p2(Vec3(-0.5,0.5,0), Vec3(0, 0.1, 0), false);
+	Point p3(Vec3(0, 0.5, 0), Vec3(0, -0.1, 0), false);
+	Point p4(Vec3(0.5, 0.5, 0), Vec3(-0.1, 0, 0), false);
+	Point p5(Vec3(0.5, 0, 0), Vec3(0.1, 0, 0), false);
+	Point p6(Vec3(0.5, -0.5, 0), Vec3(0, 0.2, 0), false);
+	Point p7(Vec3(0, -0.5, 0), Vec3(0, 0.1, 0), false);
+	Point p8(Vec3(-0.25, 0, 0), Vec3(-0.1, 0, 0), false);
+	Point p9(Vec3(0.25, 0, 0), Vec3(0.1, 0.1, 0), false);
 	this->m_points.push_back(p0);
 	this->m_points.push_back(p1);
 	this->m_points.push_back(p2);
 	this->m_points.push_back(p3);
+	this->m_points.push_back(p4);
+	this->m_points.push_back(p5);
+	this->m_points.push_back(p6);
+	this->m_points.push_back(p7);
+	this->m_points.push_back(p8);
+	this->m_points.push_back(p9);
 
-	Spring s0_1(0, 1, 1);
-	s0_1.setStiffness(40);
-	this->m_springs.push_back(s0_1);
-
-	Spring s1_2(1, 2, 1);
-	s1_2.setStiffness(40);
-	this->m_springs.push_back(s1_2);
-
-	Spring s2_3(2, 3, 1);
-	s2_3.setStiffness(40);
-	this->m_springs.push_back(s2_3);
+	for (int i = 0; i < 7; i++) {
+		this->m_springs.push_back(Spring(i, i + 1, 1));
+	}
+	this->m_springs.push_back(Spring(7, 0, 1));
+	this->m_springs.push_back(Spring(3, 8, 1));
+	this->m_springs.push_back(Spring(3, 9, 1));
 }
 void MassSpringSystemSimulator::reset() {
 	m_mouse.x = m_mouse.y = 0;
@@ -249,8 +252,8 @@ Vec3 MassSpringSystemSimulator::updateVelocity(const Point &p, const Vec3 &vel, 
 
 	case 1: // collision with ground floor
 		if (p.position[1] - sphere_size <= world_lower_bound) {
-			//result[1] *= -1;
-			result[1] = this->addGravity ? -1 * (result[1] + GRAVITY[1]) : -1 * result[1];
+			result[1] *= -1;
+			//result[1] = this->addGravity ? -1 * (result[1] - GRAVITY[1]) : -1 * result[1];
 		}
 		break;
 
@@ -261,8 +264,8 @@ Vec3 MassSpringSystemSimulator::updateVelocity(const Point &p, const Vec3 &vel, 
 		}
 		// world y axis
 		if (p.position[1] + sphere_size >= world_upper_bound || p.position[1] - sphere_size <= world_lower_bound) {
-			//result[1] *= -1;
-			result[1] = this->addGravity ? -1 * (result[1] + GRAVITY[1]) : -1 * result[1];
+			result[1] *= -1;
+			//result[1] = this->addGravity ? -1 * (result[1] - GRAVITY[1]) : -1 * result[1];
 		}
 		// world z axis
 		if (p.position[2] + sphere_size >= world_upper_bound || p.position[2] - sphere_size <= world_lower_bound) {
