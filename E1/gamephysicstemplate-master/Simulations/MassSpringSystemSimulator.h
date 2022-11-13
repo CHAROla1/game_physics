@@ -8,34 +8,18 @@
 #define MIDPOINT 2
 // Do Not Change
 
-/* hang */
-struct Spring {
-	int masspoint1;
-	int masspoint2;
-	float initialLength;
-	Spring(int p1, int p2, float l) : masspoint1(p1), masspoint2(p2), initialLength(l) {}
-};
 
-struct massPoint {
-	Vec3 position;
-	Vec3 velocity;
-	bool isFixed;
-	Vec3 force;
-	massPoint(Vec3 p, Vec3 v, bool f, Vec3 force = Vec3()) : position(p), velocity(v), isFixed(f), force(force) {}
-};
-/* hang */
+class MassSpringSystemSimulator :public Simulator {
 
-class MassSpringSystemSimulator:public Simulator{
+
 public:
+
 	// Construtors
 	MassSpringSystemSimulator();
 
-	// decstructors
-	~MassSpringSystemSimulator();
-	
 	// UI Functions
-	const char * getTestCasesStr();
-	void initUI(DrawingUtilitiesClass * DUC);
+	const char* getTestCasesStr();
+	void initUI(DrawingUtilitiesClass* DUC);
 	void reset();
 	void drawFrame(ID3D11DeviceContext* pd3dImmediateContext);
 	void notifyCaseChanged(int testCase);
@@ -43,8 +27,6 @@ public:
 	void simulateTimestep(float timeStep);
 	void onClick(int x, int y);
 	void onMouse(int x, int y);
-
-	void setScale(float x, float y, float z);
 
 	// Specific Functions
 	void setMass(float mass);
@@ -58,14 +40,11 @@ public:
 	Vec3 getVelocityOfMassPoint(int index);
 	void applyExternalForce(Vec3 force);
 
-	// integrator
-	void eulerIntegrator(float timeStep);
-	void midpointIntergrator(float timeStep);
-	
 	// Do Not Change
 	void setIntegrator(int integrator) {
 		m_iIntegrator = integrator;
 	}
+
 
 private:
 	// Data Attributes
@@ -74,20 +53,13 @@ private:
 	float m_fDamping;
 	int m_iIntegrator;
 
-	/** hang */
-	vector<massPoint*> m_massPoints;
-	vector<Spring*> m_springs;
-	void updateForce(vector<massPoint*> massPoints);
-	//void updateLength(Spring* spring);
-	void collision(massPoint* massPoint);
-	void eulerHelper(float timeStep, vector<massPoint*> massPoints);
-	
-
 	// UI Attributes
 	Vec3 m_externalForce;
 	Point2D m_mouse;
 	Point2D m_trackmouse;
 	Point2D m_oldtrackmouse;
-	Vec3 m_scale;
+
+	
 };
+
 #endif
