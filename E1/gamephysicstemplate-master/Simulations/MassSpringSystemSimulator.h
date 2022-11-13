@@ -79,6 +79,7 @@ private:
 	vector<Spring*> m_springs;
 	void updateForce(vector<massPoint*> massPoints);
 	//void updateLength(Spring* spring);
+	void collision(massPoint* massPoint);
 	void eulerHelper(float timeStep, vector<massPoint*> massPoints);
 	
 
