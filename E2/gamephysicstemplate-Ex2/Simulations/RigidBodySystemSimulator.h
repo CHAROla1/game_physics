@@ -2,15 +2,20 @@
 #define RIGIDBODYSYSTEMSIMULATOR_h
 #include "Simulator.h"
 //add your header for your rigid body system, for e.g.,
-//#include "rigidBodySystem.h" 
+#include "RigidBodySystem.h" 
+#include "collisionDetect.h"
 
 #define TESTCASEUSEDTORUNTEST 2
+
+
 
 class RigidBodySystemSimulator:public Simulator{
 public:
 	// Construtors
 	RigidBodySystemSimulator();
-	
+
+
+
 	// Functions
 	const char * getTestCasesStr();
 	void initUI(DrawingUtilitiesClass * DUC);
@@ -32,11 +37,24 @@ public:
 	void setOrientationOf(int i,Quat orientation);
 	void setVelocityOf(int i, Vec3 velocity);
 
+	// UI
+	void drawRigidBodies();
+
+	// ----------------------------------------------------------------
+	void UpdateTorque(float time);
+	void UpdateRotation(float time);
+	void UpdateInertia(float time);
+	Mat4 TransferMatrix(RigidBodySystem *rigidBody);
+	void Collision();
+
 private:
 	// Attributes
 	// add your RigidBodySystem data members, for e.g.,
 	// RigidBodySystem * m_pRigidBodySystem; 
 	Vec3 m_externalForce;
+	vector<RigidBodySystem *> m_rigidbodies;
+	float m_timeStep;
+	int m_rigidbodyIndex;
 
 	// UI Attributes
 	Point2D m_mouse;
