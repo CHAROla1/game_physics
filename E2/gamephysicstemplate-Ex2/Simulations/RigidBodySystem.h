@@ -38,10 +38,10 @@ public:
      }
 
      	// getter
-	inline float getWidth() const{return width;}
-	inline float getHeight() const{return height;}
-	inline float getDepth() const{return depth;}
-    inline float getSize() const{return Vec3(_width, _height, _depth);}
+	inline float getWidth() const{return _width;}
+	inline float getHeight() const{return _height;}
+	inline float getDepth() const{return _depth;}
+    inline Vec3 getSize() const{return Vec3(_width, _height, _depth);}
 	inline float getMass() const{return mass;}
 	inline Quat getRotation() const{return rotation;}
 	inline Vec3 getPosition() const{return position;}
@@ -57,7 +57,7 @@ public:
 	inline void setPosition(const Vec3 p) {position = p;}
 	inline void setSize(const float width, const float height, const float depth) { _width = width; _height = height; _depth = depth;}
 	inline void setVelocity(const Vec3 p) {velocity = p;}
-	inline void setAngularVelocity(const Vec3 p) {angularVelocity = p; }
+	inline void setAngularVelocity(const Vec3 p) {angularVel = p; }
 	inline void setICurrent(const Mat4 I) {I_current = I;}
 	inline void setI0(const Mat4 I) {I0 = I;}
 	inline void setRotation(const Quat r) {rotation = r;}
