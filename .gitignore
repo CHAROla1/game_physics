@@ -51,6 +51,7 @@ GamePhysics_FinalProject/.consulo/
 *.mdb
 *.opendb
 *.VC.db
+*.wav
 
 # Unity3D generated meta files
 *.pidb.meta
